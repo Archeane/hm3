@@ -2,10 +2,13 @@ import React from "react";
 import {Form, Button, Col, Row, Container, ProgressBar} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import NavigationBar from "./RegNavBar";
 
 class RegPt1 extends React.Component {
   constructor(props) {
     super(props);
+    this.addFile = this.addFile.bind(this);
+
     this.handleRegSubmit = this.handleRegSubmit.bind(this);
     this.handleNextSubmit = this.handleNextSubmit.bind(this);
     this.handleRegChange = this.handleRegChange.bind(this);
@@ -33,7 +36,7 @@ class RegPt1 extends React.Component {
     this.goBack = this.goBack.bind(this);
     this.state = {
       page: 1,
-      errMsg: false,
+      errMsg: "",
       progress: 67,
       gender: "",
       school: "",
@@ -48,6 +51,7 @@ class RegPt1 extends React.Component {
       interests: [],
       fields: [],
       url: ["", "", "", "", "", "", ""],
+      number: "",
       similarInt: "",
       similarTech: "",
       similarLang: "",
@@ -59,17 +63,30 @@ class RegPt1 extends React.Component {
     };
   }
 
+  addFile(event){
+    console.log(event.target.files[0]);
+    let file = event.target.files[0];
+    let fd = new FormData()
+    fd.append('image', file)
+
+    axios.post('https://arcane-fjord-29308.herokuapp.com/profilepic', fd, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.auth_token.toString(),
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    
+  }
+
   /// ********************** ADDERS
     handleLangAdder(event){
-        if (this.state.languages.length < 5) {
             this.setState({ languages: this.state.languages.concat([{name: "select", skill: 0}]) });
-            }
     };
 
     handleTechAdder(event){
-        if (this.state.tech.length < 5) {
             this.setState({ tech: this.state.tech.concat([{name: "select", skill: 0}]) });
-            }
+            
         };
         
     handleFieldAdder(event){
@@ -162,17 +179,24 @@ class RegPt1 extends React.Component {
         return (
         <div className="registration">
           <Container>      
+          <NavigationBar/>
           <ProgressBar variant="success" animated now={1} />
           <br/>
           <h1>Register</h1>
-          <br></br>
-          <small>{errMsg}</small>
+          <h4 style={{color: "teal"}}>get matched in minutes</h4>
+          
           <br></br>
             <Col > 
               <Row >
               <Form className="reg" onSubmit={this.handleNextSubmit}>
+
+                   <Form.Group controlId="formGridAddress1">
+                    <Form.Label>School<small style={{color: 'red'}}>*</small></Form.Label>
+                    <Form.Control placeholder="Type in your school here" name="school" value={this.state.school} onChange={this.handleRegChange} />
+                  </Form.Group>
+
                   <Form.Group as={Col} controlId="formGridState">
-                        <Form.Label>Gender*</Form.Label>
+                        <Form.Label>Gender<small style={{color: 'red'}}>*</small></Form.Label>
                         <Form.Control as="select" name="gender" value={this.state.gender} onChange={this.handleRegChange}>
                           <option>Choose...</option>
                           <option>Male</option>
@@ -182,13 +206,8 @@ class RegPt1 extends React.Component {
                     </Form.Group>
                 
 
-                <Form.Group controlId="formGridAddress1">
-                  <Form.Label>School*</Form.Label>
-                  <Form.Control placeholder="Stony Brook University" name="school" value={this.state.school} onChange={this.handleRegChange} />
-                </Form.Group>
-
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Major*</Form.Label>
+                    <Form.Label>Major<small style={{color: 'red'}}>*</small></Form.Label>
                     <Form.Control as="select" name="major" value={this.state.major} onChange={this.handleRegChange}>
                       <option>Choose...</option>
                       <option>Computer Science</option>
@@ -214,7 +233,7 @@ class RegPt1 extends React.Component {
 
                 <Form.Row>
                 <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Grad Year*</Form.Label>
+                    <Form.Label>Graduation Year<small style={{color: 'red'}}>*</small></Form.Label>
                     <Form.Control as="select"  name="year" value={this.state.year} onChange={this.handleRegChange}>
                       <option>Choose...</option>
                      
@@ -231,7 +250,7 @@ class RegPt1 extends React.Component {
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Education Level*</Form.Label>
+                    <Form.Label>Education Level<small style={{color: 'red'}}>*</small></Form.Label>
                     <Form.Control as="select" name="education" value={this.state.education} onChange={this.handleRegChange}>
                       <option>Choose...</option>
                       <option>High School</option>
@@ -241,7 +260,7 @@ class RegPt1 extends React.Component {
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>Hackathons*</Form.Label>
+                    <Form.Label>Number of Hackathons<small style={{color: 'red'}}>*</small></Form.Label>
                     <Form.Control as="select" name="hackCount" value={this.state.hackCount} onChange={this.handleRegChange}>
                       <option>Choose...</option>
                       <option value="0">This is my first!</option>
@@ -259,6 +278,9 @@ class RegPt1 extends React.Component {
                   </Form.Group>
                 </Form.Row>
 
+               
+          <small>{errMsg}</small>
+          <br></br>
                 <Button variant="primary" type="submit">
                   Next
                 </Button>
@@ -282,6 +304,7 @@ class RegPt1 extends React.Component {
       return (
         <div className="registration">
         <Container>      
+        <NavigationBar/>
         <ProgressBar variant="success" animated now={33} label={`${33}%`}/>
         <br/>
         <h1>Register</h1>
@@ -290,16 +313,17 @@ class RegPt1 extends React.Component {
             <Row >
             <Form className="reg" onSubmit={this.handleNextSubmit}>
             
+            <div style={{textAlign: "center"}}>
             <Form.Group as={Col} controlId="formGridState">
-               <Form.Label><h4>Show hackers what you know</h4><small>(you can fill this in later)</small></Form.Label>
+               <Form.Label><h4>Show hackers what you know</h4><small style={{color: "blue"}}>(you can fill this in later)</small></Form.Label>
                <br></br>
-                    <Form.Label><strong>Languages</strong></Form.Label>
+                    <Form.Label><strong>Programming Languages </strong></Form.Label>
                     {
                       this.state.languages.map((languages, index)=> {
                           return (
                           <div key={index}>
                               <Form.Group className="form-inline">
-                              <Form.Label>Language #{index+1}.</Form.Label>
+                              
                               <Form.Control
                               as="select"
                               type="text"
@@ -313,7 +337,9 @@ class RegPt1 extends React.Component {
                                     <option>{item}</option>
                                 ))}
                               </Form.Control>
+                              &nbsp;
                               <Form.Label>   Familiarity: </Form.Label>
+                              &nbsp;
                               <Form.Control
                               as="select"
                               type="text"
@@ -334,25 +360,26 @@ class RegPt1 extends React.Component {
                                   <option>9</option>
                                   <option>10</option>
                               </Form.Control>
-                              
-                              <Button variant="danger" onClick={() => this.handleRemoveLANGForm(index)}>-</Button>
+                              &nbsp;
+                              <Button variant="danger" onClick={() => this.handleRemoveLANGForm(index)}>x</Button>
                               </Form.Group>
                           </div>
                           )
                       })
                       }
                         <br/>
-                        <Button variant="outline-primary" onClick={this.handleLangAdder}>Add Language</Button>
+                        <Button variant="outline-primary" onClick={this.handleLangAdder}>Add</Button>
                   </Form.Group>
+                  </div>
 
                   <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label><strong>Technologies</strong></Form.Label>
+                    <Form.Label><strong>Libraries/Frameworks</strong></Form.Label>
                     {
                       this.state.tech.map((tech, index)=> {
                           return (
                           <div key={index}>
                               <Form.Group className="form-inline">
-                              <Form.Label>Technology #{index+1}.</Form.Label>
+                              
                               <Form.Control
                               as="select"
                               type="text"
@@ -366,7 +393,9 @@ class RegPt1 extends React.Component {
                                     <option>{item}</option>
                                 ))}
                               </Form.Control>
+                              &nbsp;
                               <Form.Label>   Familiarity: </Form.Label>
+                              &nbsp;
                               <Form.Control
                               as="select"
                               type="text"
@@ -387,8 +416,8 @@ class RegPt1 extends React.Component {
                                   <option>9</option>
                                   <option>10</option>
                               </Form.Control>
-                              
-                              <Button variant="danger" onClick={() => this.handleRemoveTECHForm(index)}>-</Button>
+                              &nbsp;
+                              <Button variant="danger" onClick={() => this.handleRemoveTECHForm(index)}>x</Button>
                               </Form.Group>
                               
                           </div>
@@ -396,16 +425,19 @@ class RegPt1 extends React.Component {
                       })
                       }
                         <br/>
-                        <Button variant="outline-primary" onClick={this.handleTechAdder}>Add Technology</Button>
+                        <Button variant="outline-primary" onClick={this.handleTechAdder}>Add</Button>
                   </Form.Group>
-                
+
+           
               <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label><strong>Interests (max 5)</strong></Form.Label>
+                    <Form.Label><strong>Programming Interest (max 5)</strong></Form.Label>
                     {
                         this.state.interests.map((interests, index)=> {
                             return (
-                                <Form.Group className="form-inline">
+                              
+                                <Form.Group className="form-inline text-center">
                                 <Form.Control
+                                className="text-center"
                                 as="select"
                                 type="text"
                                 onChange= {(e) => this.handleINTChange(e, index)}
@@ -417,19 +449,21 @@ class RegPt1 extends React.Component {
                                     <option>{item}</option>
                                 ))}
                                 </Form.Control>
-                                <span>  </span>
-                                <Button variant="danger" onClick={() => this.handleRemoveINTERESTForm(index)}>-</Button>
+                                &nbsp;
+                                <Button variant="danger" onClick={() => this.handleRemoveINTERESTForm(index)}>x</Button>
                                 </Form.Group>
+                              
                             )
                         })
                         }
                         <br/>
-                        <Button variant="outline-primary" onClick={this.handleInterestAdder}>Add Interest</Button>
+                        <Button variant="outline-primary" onClick={this.handleInterestAdder}>Add</Button>
                   </Form.Group>
+              
 
 
                   <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label><strong>Fields (max 5)</strong></Form.Label>
+                    <Form.Label><strong>Tracks (max 5)</strong></Form.Label>
                     {
                         this.state.fields.map((fields, index)=> {
                             return (
@@ -450,15 +484,15 @@ class RegPt1 extends React.Component {
 
                                     
                                 </Form.Control>
-                                
-                                <Button variant="danger" onClick={() => this.handleRemoveFIELDForm(index)}>-</Button>
+                                &nbsp;
+                                <Button variant="danger" onClick={() => this.handleRemoveFIELDForm(index)}>x</Button>
                                 </Form.Group>
                             </div>
                             )
                         })
                         }
                         <br/>
-                        <Button variant="outline-primary" onClick={this.handleFieldAdder}>Add Field</Button>
+                        <Button variant="outline-primary" onClick={this.handleFieldAdder}>Add</Button>
                   </Form.Group>
               
               <Button variant="primary" onClick={this.goBack}>
@@ -486,20 +520,67 @@ class RegPt1 extends React.Component {
       return (
         <div className="registration">
         <Container>  
+        <NavigationBar/>
         <ProgressBar variant="success" animated now={this.state.progress} label={`${this.state.progress}%`}/>
         <br/>
         <h1>Register</h1>
-        <br></br> 
-        <small>{errMsg}</small>
         <br></br>
           <Col > 
             <Row >
             <Form className="reg" onSubmit={this.handleRegSubmit}>
               
 
-              <Form.Label><h3>Help hackers connect with you</h3><small>(you can fill this in later)</small></Form.Label>
+              <Form.Label><h3>Let other hackers message you</h3></Form.Label>
               <br></br>
 
+                    <Form.Group controlId="formGridAddress1">
+                      <Form.Label>Phone Number</Form.Label>
+                      <Form.Control
+                          name="number"
+                          placeholder="Phone Number"
+                          value={this.state.number}
+                          onChange= {this.handleRegChange}
+                          className="name"
+                          />
+                    </Form.Group>
+
+                    <Form.Group controlId="formGridAddress1">
+                      <Form.Label>Facebook</Form.Label>
+                      <Form.Control
+                          type="text"
+                          placeholder="Facebook link"
+                          value={this.state.url[2]}
+                          onChange= {(e) => this.handleURLChange(e,2)}
+                          className="name"
+                          />
+                    </Form.Group>
+
+                    <Form.Group controlId="formGridAddress1">
+                      <Form.Label>Linkedin</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Linkedin link"
+                            value={this.state.url[6]}
+                            onChange= {(e) => this.handleURLChange(e,6)}
+                            className="name"
+                            />
+                    </Form.Group>
+
+                    <Form.Group controlId="formGridAddress1">
+                      <Form.Label>Devpost</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Devpost link"
+                            value={this.state.url[5]}
+                            onChange= {(e) => this.handleURLChange(e,5)}
+                            className="name"
+                            />
+                    </Form.Group>
+
+                  <Form.Label><h3>Show other hackers what you've worked on</h3>
+                  <small style={{color: "blue"}}>(you can fill this in later)</small>
+                  </Form.Label>
+                
                   <Form.Group controlId="formGridAddress1">
                       <Form.Label>Github</Form.Label>
                         <Form.Control
@@ -522,60 +603,7 @@ class RegPt1 extends React.Component {
                           />
                     </Form.Group>
 
-                    <Form.Group controlId="formGridAddress1">
-                      <Form.Label>Facebook</Form.Label>
-                      <Form.Control
-                          type="text"
-                          placeholder="Facebook link"
-                          value={this.state.url[2]}
-                          onChange= {(e) => this.handleURLChange(e,2)}
-                          className="name"
-                          />
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridAddress1">
-                      <Form.Label>Slack</Form.Label>
-                      <Form.Control
-                          type="text"
-                          placeholder="Slack link"
-                          value={this.state.url[3]}
-                          onChange= {(e) => this.handleURLChange(e,3)}
-                          className="name"
-                          />
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridAddress1">
-                      <Form.Label>Instagram</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Instagram link"
-                            value={this.state.url[4]}
-                            onChange= {(e) => this.handleURLChange(e,4)}
-                            className="name"
-                            />
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridAddress1">
-                      <Form.Label>Devpost</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Devpost link"
-                            value={this.state.url[5]}
-                            onChange= {(e) => this.handleURLChange(e,5)}
-                            className="name"
-                            />
-                    </Form.Group>
-
-                    <Form.Group controlId="formGridAddress1">
-                      <Form.Label>Linkedin</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Linkedin link"
-                            value={this.state.url[6]}
-                            onChange= {(e) => this.handleURLChange(e,6)}
-                            className="name"
-                            />
-                    </Form.Group>
+                    
 
                   <div className="input-group">
                     <div className="input-group-prepend">
@@ -585,15 +613,17 @@ class RegPt1 extends React.Component {
                     </div>
                     <div className="custom-file">
                         <form value={this.state.propic} onChange={this.handleRegChange}>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1"></label>
-                            <Form.Control
-                                  id="fileUpload"
-                                  type="file"
-                                  name="propic"
-                                  onChange={this.handleRegChange}
-                              />
-                        </div>
+                          <div class="form-group">
+                              <label for="exampleFormControlFile1"></label>
+                              <Form.Control
+                                    id="fileUpload"
+                                    type="file"
+                                    name="propic"
+                                    multiple="false"
+                                    accept=".jpg,.jpeg,.png"
+                                    onChange={this.addFile}
+                                />
+                          </div>
                         </form>
                     </div>
                 </div>
@@ -601,7 +631,7 @@ class RegPt1 extends React.Component {
 
               <Form.Label><h3>Add some more information to help us match you better!</h3></Form.Label>
               
-              <Form.Label>How much do you care about these when looking for a teammate?*</Form.Label>
+              <Form.Label>How much do you care about these when looking for a teammate?<small style={{color: 'red'}}>*</small></Form.Label>
               <Form.Label><br></br></Form.Label>
                   <Form.Row>
                   <Form.Group as={Col} controlId="formGridState">
@@ -656,7 +686,7 @@ class RegPt1 extends React.Component {
                   </Form.Row>
 
                   <Form.Group as={Col} controlId="formGridState">
-                    <Form.Label>What are the top 3 things you want to get out of a hackathon?*</Form.Label>
+                    <Form.Label>What are the top 3 things you want to get out of a hackathon?<small style={{color: 'red'}}>*</small></Form.Label>
                     {
                         this.state.goals.map((goals, index)=> {
                             return (
@@ -685,11 +715,14 @@ class RegPt1 extends React.Component {
                         }
                         </Form.Group>
                   
+                      <small>{errMsg}</small>
+                      <br></br>
 
               <Button variant="primary" onClick={this.goBack}>
                 Back
               </Button>
               <span>   </span>
+              
               <Button variant="success" type="submit" >
                 Submit
               </Button>
@@ -806,7 +839,16 @@ class RegPt1 extends React.Component {
     }).then(res => {this.props.history.push("/home");})
     } 
   else {
-    alert("fill in all required fields")
+
+    if (this.state.url[2] === "" && this.state.url[5] === "" && this.state.url[6] === "" && this.state.number === "")
+    this.setState({
+      errMsg: "You must provide a way for other hackers to message you!"
+    });
+    else {
+      this.setState({
+        errMsg: "You must fill in all required fields"
+      });
+    }
   }
   };
 
@@ -816,11 +858,13 @@ class RegPt1 extends React.Component {
         && this.state.major !== "" && this.state.year !== "" && this.state.education !== "" && this.state.hackCount !== -1) {
     this.setState({
       page: this.state.page+1,
-      errMsg: true
+      errMsg: ""
     });
   }
     else {
-      alert("fill in all required fields")
+      this.setState({
+        errMsg: "Fill in all required fields"
+      });
     }
     
   };

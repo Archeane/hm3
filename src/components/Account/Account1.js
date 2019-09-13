@@ -44,7 +44,7 @@ class Account1 extends React.Component {
           school: "Georgia Tech",
           about: "about me goes here, any projects, what your goal is (looking to win)",
           goals: ['to win the competition', 'make new friends', 'visit friends'],
-          url: ['github.com','facebook.com', 'twitter.com', 'slack.com'],
+          url: [],
           languages: [{name: "C++", skill: 10}, {name: "Javascript", skill: 5}],
           tech: [{name: "Flask", skill: 8}, {name: "AWS", skill: 4}],
           fields: ["Healthcare", "Biology"],
@@ -74,6 +74,7 @@ class Account1 extends React.Component {
               var data = JSON.parse(res.data.user);
               console.log(data);
               //parse social icons
+              console.log("here")
               console.log(data['social']);
               // console.log(data['social']['github']);
               // var social_url = [data['social']['github'],data['social']['linkedin'],data['social']['website'],data['social']['facebook'],data['social']['instagram'],data['social']['devpost']];
@@ -89,8 +90,8 @@ class Account1 extends React.Component {
                    fields: data['preferences']['fields'] || [],
                    interests: data['preferences']['interests'] || [],
                    hackathons: data['profile']['numOfHackathons'] || 0,
-                   goals: data['preferences']['goals'] || 0
-                   //url: data['social']
+                   goals: data['preferences']['goals'] || 0,
+                   url: data['social']
               });
               this.baseState = this.state
             })
@@ -284,7 +285,7 @@ class Account1 extends React.Component {
             {
             vals.map(function(item) {
                 if (item !== "")
-                 return <SocialIcon url={item} style={{ height: 35, width: 35}}/>
+                 return <SocialIcon url={item} style={{ height: 50, width: 50}}/>
                 })
             }
         </div>
@@ -822,7 +823,7 @@ class Account1 extends React.Component {
                 </Col>
             </Row>
 
-            <Row>
+            {/* <Row>
                 <Col >
                     <div >
                         <UpdatePassword />
@@ -834,7 +835,7 @@ class Account1 extends React.Component {
                         <DeleteAccount />
                     </div>
                 </Col>
-            </Row>
+            </Row> */}
 
         </Container>
 

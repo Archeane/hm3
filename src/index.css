@@ -20,7 +20,7 @@ body {
   text-align: center;
 }
 
-/*image can't be found from pages - Landing.css (maybe move assets into pages?)*/
+/*image doesnt fit to div in pages - Landing.css */
 .pt4 {
   background: url('../src/components/Landing/assets/landing_bg.jpg') no-repeat center center fixed;
 }

@@ -120,8 +120,10 @@ a {
 
 .firstinfo img {
     border-radius: 50%;
+    border: 1px solid rgb(150, 150, 150);
     width: 120px;
     height: 120px;
+
 }
 
 .firstinfo .profileinfo {

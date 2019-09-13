@@ -31,8 +31,11 @@ class MyForm extends React.Component {
             value={email}
             onChange={this.handleLoginChange}
             />
+            <span>   </span>
         </Form.Group>
+        <span>   </span>
         <Form.Group>
+            <div style={{marginLeft: '0.5rem'}}>
             <FormControl
             name="password"
             type="password"
@@ -41,7 +44,11 @@ class MyForm extends React.Component {
             value={password}
             onChange={this.handleLoginChange}
             />
+            </div>
+            
+            <div style={{marginLeft: '1rem'}}>
             <Button type="submit">Login</Button>
+            </div>
         </Form.Group>
         
       </Form>
@@ -69,7 +76,13 @@ class MyForm extends React.Component {
         console.log(res.data);
         console.log(res.data['auth_token']);
         localStorage.setItem('auth_token', res.data['auth_token']);
-        
+        localStorage.setItem('firstname', res.data['firstname']);
+        localStorage.setItem('propic', res.data['propic']);
+      }).catch(err =>{
+        this.setState({
+          errMsg: "email or password is incorrect"
+        });
+        console.log(err);
       }).then(res => {this.props.history.push("/home");})
       
     

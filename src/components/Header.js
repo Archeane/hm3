@@ -2,6 +2,26 @@ import React from 'react';
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      firstname: "qwer",
+      propic: "qwer"
+    };
+  }
+
+  componentDidMount(){
+    if(localStorage.auth_token){
+      console.log(localStorage.auth_token);
+      console.log(localStorage.firstname);
+      this.setState({
+          firstname: localStorage.firstname,
+          propic: localStorage.propic
+      })
+      console.log(localStorage.propic);
+    }
+  }
 
   render() {
     return (
@@ -24,20 +44,30 @@ class Header extends React.Component {
                 </Nav>
                 
                 <Nav.Link href="/add">
-                Add to Team
+                Edit Team
                   </Nav.Link>
 
               <Nav.Link href="/create">
                 Create Team
                   </Nav.Link>
 
-                <NavDropdown title="usernameHere">
+                  <img
+                  alt=""
+                  src={this.state.propic}
+                  width="30"
+                  height="30"
+                  className="d-inline-block align-top"
+                  style={{borderRadius: '50%'}}
+                  />
+
+                <NavDropdown 
+                title={this.state.firstname}>
                   <NavDropdown.Item href="/account">Account</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/">Log out</NavDropdown.Item>
                 </NavDropdown>
                 
-                <Nav.Link href="/chat">
+                {/* <Nav.Link href="/chat">
                   <img
                   alt=""
                   src={require("./Landing/assets/chatImage.png")}
@@ -46,7 +76,7 @@ class Header extends React.Component {
                   className="d-inline-block align-top"
                 />
                 Messages
-                  </Nav.Link>
+                  </Nav.Link> */}
               </Navbar.Collapse>
             </Navbar>
           </div>
