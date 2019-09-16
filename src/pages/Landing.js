@@ -9,7 +9,7 @@ import "./Landing.css";
 class Landing extends React.Component {
   render() {
   return (
-    <div className="Landing">
+    <div className="Landing container">
       <NavigationBar/>
       <Pt1/>
       <Pt2/>

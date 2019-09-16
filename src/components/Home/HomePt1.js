@@ -66,7 +66,7 @@ class HomePt1 extends React.Component {
           </Container>
           </div>
       } else {
-        stuff = <h1>Rendering..</h1>
+        stuff = <h1>Loading..</h1>
       }
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import SignupForm from './SignupForm'
+import SignupForm from './SignupForm';
+import { Heading } from 'evergreen-ui';
 
 class Pt4 extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class Pt4 extends React.Component {
       <div className="center">
         <div className="pt4"  >
           <div className="register-box">
-              <h1>Sign up</h1>
+              <h1>Sign Up</h1>
               <br></br>
               
               <SignupForm/>

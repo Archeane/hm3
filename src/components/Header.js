@@ -6,20 +6,17 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      firstname: "qwer",
-      propic: "qwer"
+      firstname: "",
+      propic: "https://storage.cloud.google.com/hackersmatcher/default.jpg"
     };
   }
 
   componentDidMount(){
     if(localStorage.auth_token){
-      console.log(localStorage.auth_token);
-      console.log(localStorage.firstname);
       this.setState({
           firstname: localStorage.firstname,
           propic: localStorage.propic
       })
-      console.log(localStorage.propic);
     }
   }
 
