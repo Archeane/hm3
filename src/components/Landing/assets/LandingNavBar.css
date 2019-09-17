@@ -1,0 +1,7 @@
+@media only screen and (max-device-width: 420px){
+	#myFromContainer{
+		position: relative;
+		left:25%;
+		top: 5%;
+	}
+}
