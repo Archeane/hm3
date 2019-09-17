@@ -212,10 +212,10 @@ class Sec1 extends React.Component {
                 }
                 axios.get('https://arcane-fjord-29308.herokuapp.com/hackathons/'+hackathonName+'/findmymatches', config)
                   .then(res => {
-                    console.log(res);
-                    console.log(res.data);
+                    //console.log(res);
+                    //console.log(res.data);
                     var hackers = res.data['hackers'];
-                    console.log(JSON.parse(hackers[0]['hacker']))
+                    //console.log(JSON.parse(hackers[0]['hacker']))
                     for (var i=0;i<hackers.length;i++) {
                         this.setState({ members: this.state.members.concat([{firstname: JSON.parse(hackers[i]['hacker'])['firstname'],
                                                                     lastname: JSON.parse(hackers[i]['hacker'])['lastname'],
@@ -230,11 +230,11 @@ class Sec1 extends React.Component {
                     var teams = res.data['teams'];
                     //for team
 
-                    console.log(JSON.parse(teams[0])['members'].length)
-                    console.log(JSON.parse(JSON.parse(teams[0])['members'][0]))
-                    console.log("PUT YOUR CODE HERE")
+                    // console.log(JSON.parse(teams[0])['members'].length)
+                    // console.log(JSON.parse(JSON.parse(teams[0])['members'][0]))
+                    // console.log("PUT YOUR CODE HERE")
                     
-                    console.log(JSON.parse(JSON.parse(teams[0])['members'][0])['profile_pic'])
+                    // console.log(JSON.parse(JSON.parse(teams[0])['members'][0])['profile_pic'])
 
                     if(teams.length > 0){
                     for (var i=0;i<teams.length;i++) {
@@ -243,7 +243,7 @@ class Sec1 extends React.Component {
                         for (var j=0;j<JSON.parse(teams[i])['members'].length; j++)  {
                             memberArr.concat(JSON.parse(JSON.parse(teams[i])['members'][j])['profile_pic'])
                         }
-                        console.log(memberArr)
+                        //console.log(memberArr)
 
                         this.setState({ teams: this.state.teams.concat([{
                             name: JSON.parse(teams[i])['name'],
@@ -256,16 +256,16 @@ class Sec1 extends React.Component {
                     };
                 }
 
-                    console.log("this is first team")
-                    console.log(this.state.teams[0])
-                    console.log(this.state.teams[0].memberpics)
+                    // console.log("this is first team")
+                    // console.log(this.state.teams[0])
+                    // console.log(this.state.teams[0].memberpics)
 
 
                      })
 
 
             }).catch((err) =>{      //todo: handle error
-                console.log(err);
+               // console.log(err);
             });
         }
 

@@ -42,7 +42,7 @@ class Account1 extends React.Component {
           major: "test",
           propic: require("../Hackathon/graysquare.png"),
           school: "tester",
-          about: "test",
+          about: "about me goes here, any projects, what your goal is (looking to win)",
           goals: ['to win the competition', 'make new friends', 'visit friends'],
           url: [],
           languages: [{name: "C++", skill: 10}, {name: "Javascript", skill: 5}],
