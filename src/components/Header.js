@@ -6,17 +6,20 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      firstname: "",
-      propic: "https://storage.cloud.google.com/hackersmatcher/default.jpg"
+      firstname: "qwer",
+      propic: "qwer"
     };
   }
 
   componentDidMount(){
     if(localStorage.auth_token){
+      console.log(localStorage.auth_token);
+      console.log(localStorage.firstname);
       this.setState({
           firstname: localStorage.firstname,
           propic: localStorage.propic
       })
+      console.log(localStorage.propic);
     }
   }
 
@@ -32,6 +35,7 @@ class Header extends React.Component {
               height="30"
               className="d-inline-block align-top"
             />
+            <span>  </span>
             Hacker Matcher
               </Navbar.Brand>
 

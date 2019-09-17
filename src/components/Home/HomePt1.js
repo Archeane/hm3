@@ -44,7 +44,7 @@ class HomePt1 extends React.Component {
   render(){
       let stuff;
 
-      if (this.state.isGood) {
+      if (true) {
           stuff = <div>
           <Container>
 

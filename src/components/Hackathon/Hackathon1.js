@@ -236,6 +236,7 @@ class Sec1 extends React.Component {
                     
                     console.log(JSON.parse(JSON.parse(teams[0])['members'][0])['profile_pic'])
 
+                    if(teams.length > 0){
                     for (var i=0;i<teams.length;i++) {
                         const memberArr = [];
 
@@ -253,6 +254,7 @@ class Sec1 extends React.Component {
                         })
                         
                     };
+                }
 
                     console.log("this is first team")
                     console.log(this.state.teams[0])
