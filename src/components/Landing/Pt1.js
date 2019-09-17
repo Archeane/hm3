@@ -8,7 +8,7 @@ class Pt1 extends React.Component {
     <div className="center" id="about-box">
       <div className="pt1">
         <h1>
-          Hacker Matcher
+          <strong>Hacker Matcher</strong>
         </h1>
 
         <img
@@ -17,14 +17,14 @@ class Pt1 extends React.Component {
           src={require("./assets/landing_demo.gif")}
         />
 
-        <h4>
+        <h3>
           
           Find your perfect hackathon team
-        </h4>
+        </h3>
         <br></br>
 
         <Button className="btn btn-primary btn-lg" id="scrollToSignup" onClick={()=>window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}>
-          Try It Now
+          Try It Now!
         </Button>
       </div>
     </div>

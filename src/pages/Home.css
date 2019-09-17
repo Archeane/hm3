@@ -80,6 +80,10 @@ a {
         margin-bottom: 1.5em; 
     }
 
+    .hackcard:hover {
+        background-color: rgb(239, 246, 255);
+    }
+
     .firstinfo {
         flex-direction: row;
         z-index: 2;

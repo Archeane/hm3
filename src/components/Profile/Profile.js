@@ -9,7 +9,7 @@ class Profile1 extends React.Component {
         super(props);
         
         this.state = {
-          username: "Bobby Fisher",
+          username: "Template",
           educationLvl: "college",
           year: "2022",
           major: "Applied Mathematics",

@@ -308,6 +308,7 @@ class RegPt1 extends React.Component {
         <ProgressBar variant="success" animated now={33} label={`${33}%`}/>
         <br/>
         <h1>Register</h1>
+        <h4 style={{color: "teal"}}>get matched in minutes</h4>
         <br></br>
           <Col > 
             <Row >
@@ -524,6 +525,7 @@ class RegPt1 extends React.Component {
         <ProgressBar variant="success" animated now={this.state.progress} label={`${this.state.progress}%`}/>
         <br/>
         <h1>Register</h1>
+        <h4 style={{color: "teal"}}>get matched in minutes</h4>
         <br></br>
           <Col > 
             <Row >

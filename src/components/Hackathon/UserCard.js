@@ -26,10 +26,11 @@ class UserCard extends React.Component {
                     <Col>
                         <div className="card shadow">
                             <div className="card-body">
+                                <a href={`/profile/${this.state.id}`}>
                                 <Row>
                                     <Col className="text-left">
                                         <Row>
-                                            <img className="d-block mx-auto rounded-circle img-fluid" alt="userImg" src={this.state.propic}></img>
+                                            <img className="d-block mx-auto rounded-circle img-fluid"  alt="userImg" src={this.state.propic}></img>
 
                                         </Row>
                                         <Row >
@@ -38,7 +39,7 @@ class UserCard extends React.Component {
                                     </Col>
                                     <Col className="text-left">
                                         <Row>
-                                        <h3 className="font-weight-light d-inline"><a className="text-dark card-btn" id="card-btn" href={`/profile/${this.state.id}`} >{this.state.firstname} {this.state.lastname}</a></h3>
+                                        <h3 className="font-weight-light d-inline"><a className="card-btn" id="card-btn" href={`/profile/${this.state.id}`} >{this.state.firstname} {this.state.lastname}</a></h3>
                                         </Row>
                                         <Row>
                                         <span>{this.state.school}</span>
@@ -48,17 +49,18 @@ class UserCard extends React.Component {
                                         </Row>
                                         <Row>
                                         <ul className="list-inline mt-3 tag-list">
-                                                {this.state.tags.map((item, index) => ( 
+                                                {this.state.tags.slice(0, 5).map((item, index) => ( 
                                                         <li className="list-inline-item">
-                                                        <button  disabled className="btn btn-light">
+                                                        <button  disabled className="btn btn-light btn-sm">
                                                             {item}
                                                         </button>
-                                                    </li>
+                                                        </li>
                                                 ))}
                                         </ul>
                                         </Row>
                                     </Col>
                                     </Row>  
+                                 </a>
                             </div>
                         </div>
                     </Col>

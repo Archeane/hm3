@@ -1,10 +1,7 @@
 
-/*.card-body.teamcard{
-    width: 35rem;
+.card-body:hover{
+        background-color: rgb(239, 246, 255);
 }
-.card-body.usercard{
-    width: 35rem;
-}*/
 
 .teamcard{
     width: 100vw;
@@ -241,6 +238,14 @@ img.hackathonImg{
     .usercard{
         width: 28rem;
     }*/
+    .card-body:hover{
+        background-color: rgb(239, 246, 255);
+}
+
+.card-btn:hover{
+    color: #86b4e6;
+}
+
 }
 @media (min-width: 1200px) { 
     .namebox{
@@ -252,6 +257,14 @@ img.hackathonImg{
     .rectanglehack{
         height:300px;
     }
+
+    .card-body:hover{
+        background-color: rgb(239, 246, 255);
+}
+
+.card-btn:hover{
+    color: #86b4e6;
+}
     /*
     .usercard{
         width: 32rem;

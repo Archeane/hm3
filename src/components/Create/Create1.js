@@ -114,6 +114,21 @@ class Create1 extends React.Component {
                     <br></br>
                     <div class="search">
                     <span class="fa fa-search"></span>
+                    <Form.Control as="select" name="hack" value={this.state.available}
+                          onChange={this.handleCreateChange}
+                          onSelect={(record) => {
+                            if (this.state.members.length < 3 && this.state.members.indexOf(record) === -1)
+                            this.setState({ members: this.state.members.concat(record) })}}>
+
+                          <option>Choose...</option>
+                            {this.state.available.map((item, index) => ( 
+                              <option>{item.value}</option>
+                          ))}
+                        </Form.Control>
+
+
+                       
+
                     <ReactSearchBox
                       placeholder="Teammate name"
                       data={available}

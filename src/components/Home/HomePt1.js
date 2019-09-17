@@ -32,10 +32,11 @@ class HomePt1 extends React.Component {
         console.log(res);
         var hackathons = res.data['hackathons'];
         console.log(JSON.parse(hackathons[0])['name']);
-        this.setState({
-          hackathons: hackathons,
-          isGood: true
-      });
+        console.log(hackathons)
+       this.setState({
+         hackathons: hackathons,
+         isGood: true
+       })
       });
   }
 
@@ -46,7 +47,14 @@ class HomePt1 extends React.Component {
       if (this.state.isGood) {
           stuff = <div>
           <Container>
-          <Row>
+
+              <Row>
+                <Col>
+                    <HackathonCard hackInfo={this.state.hackathons}/>
+                </Col>
+               
+              </Row>
+          {/* <Row>
             <Col>
                 <HackathonCard hackInfo={JSON.parse(this.state.hackathons[0])}/>
             </Col>
@@ -62,7 +70,7 @@ class HomePt1 extends React.Component {
             <Col >
                 <HackathonCard hackInfo={JSON.parse(this.state.hackathons[3])}/>
             </Col>
-          </Row>
+          </Row> */}
           </Container>
           </div>
       } else {

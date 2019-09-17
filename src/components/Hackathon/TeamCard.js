@@ -22,7 +22,8 @@ class TeamCard extends React.Component {
                         <Col>
                             <div className="card shadow">
                                 <div className="card-body">
-                                    <Row>
+                                    <a href={`/team/${this.state.id}`}>
+                                    <Row >
                                             <Col className="text-center">
                                                 <Row>
                                                     <img className="d-block mx-auto rounded-circle" src={this.state.propic[0]}></img>
@@ -43,12 +44,8 @@ class TeamCard extends React.Component {
                                                     {this.state.goals}
                                                 </Row>
                                         </Col>
-
-                                    
                                     </Row>
-
-
-
+                                    </a>
                                 </div>
                             </div>
                         </Col>
