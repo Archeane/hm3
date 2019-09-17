@@ -21,30 +21,7 @@ class Create1 extends React.Component {
       members: [],
       hackathons: [],
       available: [
-          {id: "5d5f8180c7e5b84e5e9a4d1a", value: "Brooklyn Zhang"},
-          {id: "5d5f8177c7e5b84e5e9a4d11", value: "Olga Vega"},
-          {id: "5d5f7f98090899056c18639b", value: "Jeff Montgomery"},
-          {id: "5d5f818cc7e5b84e5e9a4d24", value: "Vildan Erkekli"},
-          {id: "5d5f81da22ca71c2e147da34", value: "Julia Watts"},
-          {id: "5d5f8176c7e5b84e5e9a4d10", value: "Tony Carroll"},
-          {id: "5d5f81e022ca71c2e147da3b", value: "Aiden Skjelstad"},
-          {id: "5d5f816cc7e5b84e5e9a4d07", value: "Tilde Kristensen"},
-          {id: "5d5f818fc7e5b84e5e9a4d26", value: "Lison Lefevre"},
-          {id: "5d5f81de22ca71c2e147da39", value: "Florence Murray"},
-          {id: "5d5f8190c7e5b84e5e9a4d27", value: "Niklas Wainio"},
-          {id: "5d5f81cf22ca71c2e147da29", value: "Edith Vasquez"},
-          {id: "5d5f8172c7e5b84e5e9a4d0d", value: "Carl Jensen"},
-          {id: "5d5f818ec7e5b84e5e9a4d25", value: "Daniel Slawa"},
-          {id: "5d5f7fb0090899056c1863b1", value: "Violet Wang"},
-          {id: "5d5f81ca22ca71c2e147da25", value: "Necati Adal"},
-          {id: "5d5f8185c7e5b84e5e9a4d1d", value: "Rosa Armstrong"},
-          {id: "5d5f81df22ca71c2e147da3a", value: "Nathan Harcourt"},
-          {id: "5d5f7f96090899056c186398", value: "Mark Adams"},
-          {id: "5d5f81dd22ca71c2e147da38", value: "Amparo Soto"},
-          {id: "5d5f7f97090899056c18639a", value: "Christian Johnston"},
-          {id: "5d5f7f9c090899056c18639e", value: "Alena Duval"},
-          {id: "5d5f8188c7e5b84e5e9a4d20", value: "Alejandro Ortega"},
-          {id: "5d5f7fa0090899056c1863a1", value: "Anna Mendoza"}
+          
       ],
       value: ""
     };
@@ -117,10 +94,10 @@ class Create1 extends React.Component {
                     <br></br>
                     <div class="search">
                     
-                    <Form.Control as="select" name="value" value={this.state.value}
+                    <Form.Control as="select" name="value"  value={this.state.value}
                           onChange= {(e) => this.handleDropdown(e)}
                           >
-                          <option>Choose...</option>
+                          
                             {this.state.available.map((item, index) => ( 
                               <option>{item.value}</option>
                           ))}
@@ -173,6 +150,7 @@ class Create1 extends React.Component {
         var hackathonSelected = this.state.hack;
         console.log(this.state.hack)
         var url = "https://arcane-fjord-29308.herokuapp.com/hackathons/"+hackathonSelected+"/getmatch";
+        console.log("hackathonSelected:" + hackathonSelected)
         var config = {
           headers: {'Authorization': 'Bearer ' + localStorage.auth_token.toString()}
         };
@@ -224,6 +202,8 @@ class Create1 extends React.Component {
             'capacity': 4
             //'details': details
           }
+
+          console.log(data)
 
           axios.post(url, data, config)
             .then(res => {
