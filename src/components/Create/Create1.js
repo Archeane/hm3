@@ -9,6 +9,7 @@ class Create1 extends React.Component {
     super(props);
     this.handleCreateSubmit = this.handleCreateSubmit.bind(this);
     this.handleCreateChange = this.handleCreateChange.bind(this);
+    this.handleDropdown = this.handleDropdown.bind(this);
     this.deleteName = this.deleteName.bind(this);
 
     this.state = {
@@ -44,7 +45,8 @@ class Create1 extends React.Component {
           {id: "5d5f7f9c090899056c18639e", value: "Alena Duval"},
           {id: "5d5f8188c7e5b84e5e9a4d20", value: "Alejandro Ortega"},
           {id: "5d5f7fa0090899056c1863a1", value: "Anna Mendoza"}
-      ]
+      ],
+      value: ""
     };
   }
 
@@ -69,7 +71,8 @@ class Create1 extends React.Component {
             <div>
             {
             vals.map((item, index) => ( 
-                <Button key={index} variant="info" size="sm" disabled>{item.value}</Button>
+              
+                <Button key={index} variant="info" size="sm" disabled>{item}</Button>
                 ))
             }
             </div>
@@ -113,31 +116,15 @@ class Create1 extends React.Component {
                     <small>(Note: they must select that they are attending this hackathon)</small>
                     <br></br>
                     <div class="search">
-                    <span class="fa fa-search"></span>
-                    <Form.Control as="select" name="hack" value={this.state.available}
-                          onChange={this.handleCreateChange}
-                          onSelect={(record) => {
-                            if (this.state.members.length < 3 && this.state.members.indexOf(record) === -1)
-                            this.setState({ members: this.state.members.concat(record) })}}>
-
+                    
+                    <Form.Control as="select" name="value" value={this.state.value}
+                          onChange= {(e) => this.handleDropdown(e)}
+                          >
                           <option>Choose...</option>
                             {this.state.available.map((item, index) => ( 
                               <option>{item.value}</option>
                           ))}
                         </Form.Control>
-
-
-                       
-
-                    <ReactSearchBox
-                      placeholder="Teammate name"
-                      data={available}
-                      dropDownBorderColor="blue"
-                      onFocus={(event) =>  event.target.value = null}
-                      onSelect={(record) => {
-                                    if (this.state.members.length < 3 && this.state.members.indexOf(record) === -1)
-                                    this.setState({ members: this.state.members.concat(record) })}}
-                    />
                     </div>
 
                     <MemberTags vals={this.state.members}/>
@@ -252,6 +239,15 @@ class Create1 extends React.Component {
           );
         //
   }
+
+
+  handleDropdown(e) {
+    this.state.value = e.target.value;
+    if (this.state.members.length < 3  && this.state.members.indexOf(this.state.value) === -1)
+           this.setState({ members: this.state.members.concat(this.state.value) })
+}
+
+
 
   deleteName(event){
     let members = this.state.members.slice();  

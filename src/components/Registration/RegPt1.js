@@ -50,7 +50,7 @@ class RegPt1 extends React.Component {
       tech: [],
       interests: [],
       fields: [],
-      url: ["", "", "", "", "", "", ""],
+      url: ["", "", "", "", ""],
       number: "",
       similarInt: "",
       similarTech: "",
@@ -78,6 +78,8 @@ class RegPt1 extends React.Component {
 
     
   }
+
+
 
   /// ********************** ADDERS
     handleLangAdder(event){
@@ -174,6 +176,8 @@ class RegPt1 extends React.Component {
 
   render() {
     const {page, errMsg} = this.state;
+
+
 
       if (page === 1) {
         return (
@@ -551,8 +555,8 @@ class RegPt1 extends React.Component {
                       <Form.Control
                           type="text"
                           placeholder="Facebook link"
-                          value={this.state.url[2]}
-                          onChange= {(e) => this.handleURLChange(e,2)}
+                          value={this.state.url[0]}
+                          onChange= {(e) => this.handleURLChange(e,0)}
                           className="name"
                           />
                     </Form.Group>
@@ -562,8 +566,8 @@ class RegPt1 extends React.Component {
                         <Form.Control
                             type="text"
                             placeholder="Linkedin link"
-                            value={this.state.url[6]}
-                            onChange= {(e) => this.handleURLChange(e,6)}
+                            value={this.state.url[1]}
+                            onChange= {(e) => this.handleURLChange(e,1)}
                             className="name"
                             />
                     </Form.Group>
@@ -573,8 +577,8 @@ class RegPt1 extends React.Component {
                         <Form.Control
                             type="text"
                             placeholder="Devpost link"
-                            value={this.state.url[5]}
-                            onChange= {(e) => this.handleURLChange(e,5)}
+                            value={this.state.url[2]}
+                            onChange= {(e) => this.handleURLChange(e,2)}
                             className="name"
                             />
                     </Form.Group>
@@ -588,8 +592,8 @@ class RegPt1 extends React.Component {
                         <Form.Control
                         type="text"
                         placeholder="Github link"
-                        value={this.state.url[0]}
-                        onChange= {(e) => this.handleURLChange(e,0)}
+                        value={this.state.url[3]}
+                        onChange= {(e) => this.handleURLChange(e,3)}
                         className="name"
                         />
                     </Form.Group>
@@ -599,14 +603,13 @@ class RegPt1 extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Website link"
-                          value={this.state.url[1]}
-                          onChange= {(e) => this.handleURLChange(e,1)}
+                          value={this.state.url[4]}
+                          onChange= {(e) => this.handleURLChange(e,4)}
                           className="name"
                           />
                     </Form.Group>
 
                     
-
                   <div className="input-group">
                     <div className="input-group-prepend">
                         <span className="input-group-text">
@@ -842,16 +845,28 @@ class RegPt1 extends React.Component {
     } 
   else {
 
-    if (this.state.url[2] === "" && this.state.url[5] === "" && this.state.url[6] === "" && this.state.number === "")
+    if (this.state.url[0] === "" && this.state.url[1] === "" && this.state.url[2] === "" && this.state.number === "")
     this.setState({
       errMsg: "You must provide a way for other hackers to message you!"
     });
+    else if (!this.state.url.every(validHTTPS)){
+        this.setState({
+          errMsg: "Each url should contain the https:// prefix"
+        });
+      }
     else {
       this.setState({
         errMsg: "You must fill in all required fields"
       });
     }
   }
+
+  function validHTTPS(element) {
+    if (element === "")
+      return true;
+    return (element.includes("https://"));
+  }
+
   };
 
   handleNextSubmit(event){
@@ -877,6 +892,8 @@ class RegPt1 extends React.Component {
     });
 
   }
+
+  
 
 }
 
