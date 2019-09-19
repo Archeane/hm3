@@ -73,7 +73,7 @@ class Sec1 extends React.Component {
                                 className="hackathonImg">
                             </img>
                         </Col>
-                        <Col id="date" xs={{span:12}} sm={{span:12}} md={{span:4, order:1}} lg={{span:4, order:1}} xl={{span:4, order:1}} className="date">{this.state.startDate}-{this.state.endDate}</Col>
+                        <Col id="date" xs={{span:12}} sm={{span:12}} md={{span:4, order:1}} lg={{span:4, order:1}} xl={{span:4, order:1}} className="date">{this.state.startDate} - {this.state.endDate}</Col>
                         <Col id="location" xs={{span:12}} sm={{span:12}} md={{span:4, order:3}} lg={{span:4, order:3}} xl={{span:4, order:3}} className="location">{this.state.hackLoc}</Col>
                     </Row>
                 </Container>

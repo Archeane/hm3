@@ -44,6 +44,7 @@ class Header extends React.Component {
                 <Nav className="mr-auto">
                 </Nav>
                 
+              
                 <Nav.Link href="/add">
                 Edit Team
                   </Nav.Link>
@@ -67,6 +68,9 @@ class Header extends React.Component {
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/">Log out</NavDropdown.Item>
                 </NavDropdown>
+
+                <div style={{width: "40px"}}></div>
+              
                 
                 {/* <Nav.Link href="/chat">
                   <img

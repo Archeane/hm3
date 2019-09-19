@@ -14,6 +14,7 @@ class Create1 extends React.Component {
 
     this.state = {
       modalPop: false,
+      btn_disabled: true,
       hack: "",
       idea: "",
       goal: "",
@@ -83,7 +84,7 @@ class Create1 extends React.Component {
                                     placeholder="What is your project about? What are you using to make it? What skill level are you looking
                                     for in a possible teammate?" 
                                     value={this.state.idea}
-                                    onChange={this.handleCreateChange}
+                                    onChange={(event) => { this.handleCreateChange(event); this.setState({btn_disabled: false});}}
                                     ></textarea>
                 </Form.Group>
 
@@ -94,11 +95,13 @@ class Create1 extends React.Component {
                     <br></br>
                     <div class="search">
                     
-                    <Form.Control as="select" name="value"  value={this.state.value}
+                    <Form.Control as="select" name="value"  value={this.state.value} disabled={this.state.btn_disabled}
+                   
                           onChange= {(e) => this.handleDropdown(e)}
                           >
-                          
+                            <option>Choose...</option>
                             {this.state.available.map((item, index) => ( 
+                              
                               <option>{item.value}</option>
                           ))}
                         </Form.Control>
@@ -143,14 +146,16 @@ class Create1 extends React.Component {
       }
 
       handleCreateChange(event){
-        this.setState({
-          [event.target.name]: event.target.value
-        });
-        
+        if (event.target.value !== "Choose...")
+            this.setState({
+              [event.target.name]: event.target.value,
+              
+            });
+          
         var hackathonSelected = this.state.hack;
         console.log(this.state.hack)
         var url = "https://arcane-fjord-29308.herokuapp.com/hackathons/"+hackathonSelected+"/getmatch";
-        console.log("hackathonSelected:" + hackathonSelected)
+        // console.log("hackathonSelected:" + hackathonSelected)
         var config = {
           headers: {'Authorization': 'Bearer ' + localStorage.auth_token.toString()}
         };
@@ -224,6 +229,7 @@ class Create1 extends React.Component {
   handleDropdown(e) {
     this.state.value = e.target.value;
     if (this.state.members.length < 3  && this.state.members.indexOf(this.state.value) === -1)
+      if (e.target.value !== "Choose...")
            this.setState({ members: this.state.members.concat(this.state.value) })
 }
 

@@ -12,7 +12,12 @@ class Sec1 extends React.Component {
           idea: "a projecto make corn oil powered caasdabout cars and gas efficiency. We are looking to make corn oil powered caasdabout cars and gas efficiency. We are looking to make corn oil powered caasd to make corn oil powered caasdfasdfasfaffasrs.",
           members: [
               {name: "mary", school: "sbu", major: "business", goals: "to win the competition a lot a lot", tags: ["ai", "cv", "full stack"], propic: "http://api.randomuser.me/portraits/women/71.jpg"},
-              {name: "scotty", school: "sbu", major: "business", goals: "hello hello this is it hello lhewrqer!", tags: ["ai", "cv", "full stack"], propic: "http://api.randomuser.me/portraits/men/71.jpg"}
+              {name: "scotty",
+              school: "sbu",
+              major: "business",
+              goals: "hello hello this is it hello lhewrqer!",
+              tags: ["ai", "cv", "full stack"],
+              propic: "http://api.randomuser.me/portraits/men/71.jpg"}
           ]
         };
       }
