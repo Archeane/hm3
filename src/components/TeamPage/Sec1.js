@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Col, Button, Image, Row, ButtonToolbar, Form } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 import UserCard from '../Hackathon/UserCard'
 import axios from 'axios';
 
@@ -9,7 +10,7 @@ class Sec1 extends React.Component {
 
         this.state = {
           teamname: "405 Found",
-          idea: "a projecto make corn oil powered caasdabout cars and gas efficiency. We are looking to make corn oil powered caasdabout cars and gas efficiency. We are looking to make corn oil powered caasd to make corn oil powered caasdfasdfasfaffasrs.",
+          idea: "a project to make corn oil powered caasdabout cars and gas efficiency. We are looking to make corn oil powered caasdabout cars and gas efficiency. We are looking to make corn oil powered caasd to make corn oil powered caasdfasdfasfaffasrs.",
           members: [
               {name: "mary", school: "sbu", major: "business", goals: "to win the competition a lot a lot", tags: ["ai", "cv", "full stack"], propic: "http://api.randomuser.me/portraits/women/71.jpg"},
               {name: "scotty",
@@ -20,21 +21,27 @@ class Sec1 extends React.Component {
               propic: "http://api.randomuser.me/portraits/men/71.jpg"}
           ]
         };
+        this.baseState = this.state;
       }
 
       componentDidMount() {
-        // var teamId = this.props.match.params.id;
-        // console.log(teamId);
-         var url='https://arcane-fjord-29308.herokuapp.com/teams/qwer';
+        var teamId = this.props.match.params.id;
+        var url='https://arcane-fjord-29308.herokuapp.com/teams/'+teamId;
         axios.get(url)
           .then(res => {
-            console.log(res);
+            //console.log(res);
             var teaminfo = JSON.parse(res.data['team']);
-            console.log(teaminfo);
+            var teamMembers = []
+            for(var i = 0; i < teaminfo['members'].length;i++){
+              var member = JSON.parse(teaminfo['members'][i]);
+              teamMembers.push(member);
+            }
             this.setState({
                 teamname: teaminfo['name'],
-                idea: teaminfo['idea']
+                idea: teaminfo['idea'],
+                members: teamMembers
             });
+            console.log(this.state);
           });
       }
 
@@ -98,4 +105,4 @@ class Sec1 extends React.Component {
     }
 }
 
-export default Sec1 
+export default withRouter(Sec1);

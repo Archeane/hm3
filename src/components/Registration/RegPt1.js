@@ -326,7 +326,7 @@ class RegPt1 extends React.Component {
                     {
                       this.state.languages.map((languages, index)=> {
                           return (
-                          <div key={index}>
+                          <div class="offset-md-3" key={index}>
                               <Form.Group className="form-inline">
                               
                               <Form.Control
@@ -382,7 +382,7 @@ class RegPt1 extends React.Component {
                     {
                       this.state.tech.map((tech, index)=> {
                           return (
-                          <div key={index}>
+                          <div class="offset-md-3" key={index}>
                               <Form.Group className="form-inline">
                               
                               <Form.Control
@@ -439,7 +439,7 @@ class RegPt1 extends React.Component {
                     {
                         this.state.interests.map((interests, index)=> {
                             return (
-                              
+                              <div class="offset-md-3">
                                 <Form.Group className="form-inline text-center">
                                 <Form.Control
                                 className="text-center"
@@ -457,7 +457,7 @@ class RegPt1 extends React.Component {
                                 &nbsp;
                                 <Button variant="danger" onClick={() => this.handleRemoveINTERESTForm(index)}>x</Button>
                                 </Form.Group>
-                              
+                              </div>
                             )
                         })
                         }
@@ -472,7 +472,7 @@ class RegPt1 extends React.Component {
                     {
                         this.state.fields.map((fields, index)=> {
                             return (
-                            <div key={index}>
+                            <div class="offset-md-3" key={index}>
                                 <Form.Group className="form-inline">
                                 <Form.Control
                                 as="select"
@@ -611,12 +611,7 @@ class RegPt1 extends React.Component {
 
                     
                   <div className="input-group">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">
-                        Profile Picture
-                        </span>
-                    </div>
-                    <div className="custom-file">
+                    <div className=" offset-md-3 custom-file">
                         <form value={this.state.propic} onChange={this.handleRegChange}>
                           <div class="form-group">
                               <label for="exampleFormControlFile1"></label>

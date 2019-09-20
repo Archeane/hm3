@@ -69,13 +69,13 @@ class Account1 extends React.Component {
           };
           axios.get(`https://arcane-fjord-29308.herokuapp.com/auth/account`, config)
             .then(res => {
-              console.log(res);
-              console.log(res.data);
+              // console.log(res);
+              // console.log(res.data);
               var data = JSON.parse(res.data.user);
-              console.log(data);
+              //console.log(data);
               //parse social icons
-              console.log("here")
-              console.log(data['social']);
+              
+              //console.log(data['social']);
               // console.log(data['social']['github']);
               // var social_url = [data['social']['github'],data['social']['linkedin'],data['social']['website'],data['social']['facebook'],data['social']['instagram'],data['social']['devpost']];
               // console.log(social_url);
@@ -91,7 +91,8 @@ class Account1 extends React.Component {
                    interests: data['preferences']['interests'] || [],
                    hackathons: data['profile']['numOfHackathons'] || 0,
                    goals: data['preferences']['goals'] || 0,
-                   url: data['social']
+                   url: data['social'],
+                   propic: localStorage.propic
               });
               this.baseState = this.state
             })

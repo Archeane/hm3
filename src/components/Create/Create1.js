@@ -24,7 +24,8 @@ class Create1 extends React.Component {
       available: [
           
       ],
-      value: ""
+      value: "",
+      hacker_id: {}
     };
   }
 
@@ -91,7 +92,7 @@ class Create1 extends React.Component {
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Choose Teammates (max 3) </Form.Label>
                     <br></br>
-                    <small>(Note: they must select that they are attending this hackathon)</small>
+                    <small>(Note: please fill in your project idea before selecting teammates)</small>
                     <br></br>
                     <div class="search">
                     
@@ -126,7 +127,7 @@ class Create1 extends React.Component {
 
                 <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>Team Name</Form.Label>
-                    <Form.Control name="name" placeholder="405 Found" value={this.state.name} onChange={this.handleCreateChange}>
+                    <Form.Control name="name" placeholder="Come up with a cool name!" value={this.state.name} onChange={this.handleCreateChange}>
                         
                     </Form.Control>
                 </Form.Group>
@@ -153,7 +154,7 @@ class Create1 extends React.Component {
             });
           
         var hackathonSelected = this.state.hack;
-        console.log(this.state.hack)
+        //console.log(this.state.hack)
         var url = "https://arcane-fjord-29308.herokuapp.com/hackathons/"+hackathonSelected+"/getmatch";
         // console.log("hackathonSelected:" + hackathonSelected)
         var config = {
@@ -161,21 +162,26 @@ class Create1 extends React.Component {
         };
         axios.get(url, config)
           .then(res => {
-            console.log(res);
+            //console.log(res);
             var hackers = res.data['hackers'];
             this.setState({available: hackers}) // doesnt work, reactsearchbox doesn't rerender on changing available hackers
+
+            var hacker_id = new Map();
 
             var queries = [];
             for(var i = 0; i < hackers.length; i++){
               var hacker = hackers[i];
               var query = {
                 'key': i,
-                'value': hacker['value']
+                'value': hacker['value'],
+                'id': hacker['id']
               }
               queries.push(query);
+              hacker_id.set(hacker['value'], hacker['id']);
             }
             this.setState({
-              available: queries
+              available: queries,
+              hacker_id: hacker_id
             });
           });
       };
@@ -193,9 +199,7 @@ class Create1 extends React.Component {
           var members = this.state.members;
           var members_arr = [];
           for(var i = 0; i < members.length; i++){
-            if(typeof members[i]['id'] == 'string'){
-              members_arr.push(members[i]['id']);
-            }
+            members_arr.push(this.state.hacker_id.get(members[i]));
           }
           
           var data = {
@@ -207,22 +211,13 @@ class Create1 extends React.Component {
             'capacity': 4
             //'details': details
           }
-
-          console.log(data)
-
           axios.post(url, data, config)
             .then(res => {
-              var teamId = JSON.parse(res.data)['team_id']
-              
-              
               console.log(res);
+              //console.log(res.data);
+              var teamId = res.data['team_id'];
               this.props.history.push("/team/" + teamId)
-
-              
-            }).catch(      //todo: handle error
-              this.props.history.push("/team/sample")
-          );
-        //
+            });   
   }
 
 
