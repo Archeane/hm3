@@ -218,7 +218,7 @@ class Account1 extends React.Component {
     };
 
     handleProfileSubmit(event){
-        console.log(this.state);
+        //console.log(this.state);
         var profile = {
           'gender': this.state.gender,
           'school': this.state.school,
@@ -240,18 +240,19 @@ class Account1 extends React.Component {
           'preferences': preferences,
           'social': social
         }
-        console.log(postData);
-        console.log(preferences);
+        //console.log(postData);
+        //console.log(preferences);
         var config = {
           headers: {'Authorization': 'Bearer ' + localStorage.auth_token.toString()}
         };
         axios.post('https://arcane-fjord-29308.herokuapp.com/auth/account', postData, config).then(res => {
-            console.log(res);
-            console.log(res.data);
+            //console.log(res);
+            //console.log(res.data);
          }).then(this.setState({page: true}) )
 
          //res => {this.props.history.push("/account");}
-        console.log(this.state)
+        //console.log(this.state)
+        this.baseState = this.state
     }
 
     handleProfileCancel(event){
@@ -263,8 +264,8 @@ class Account1 extends React.Component {
          this.setState({ tech: this.baseState.tech})
          this.setState({ interests: this.baseState.interests})
         this.setState({page: true})
-    }
-    
+    }   
+     
   render() {
     const {page} = this.state;
 
@@ -811,10 +812,10 @@ class Account1 extends React.Component {
             <Row>
                 <Col >
                     <br/>
-                    <Button variant="failure" onClick = {this.handleProfileCancel}>Cancel</Button>
+                    {/* <Button variant="failure" onClick = {this.handleProfileCancel}>Cancel</Button> */}
                     <Button variant="success" onClick = {this.handleProfileSubmit}>Update Profile</Button>
                 </Col>
-            </Row>
+            </Row> 
 
             <Row>
                 <Col >

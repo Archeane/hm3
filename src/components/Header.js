@@ -45,9 +45,9 @@ class Header extends React.Component {
                 </Nav>
                 
               
-                <Nav.Link href="/add">
+                {/* <Nav.Link   href="/add">
                 Edit Team
-                  </Nav.Link>
+                  </Nav.Link> */}
 
               <Nav.Link href="/create">
                 Create Team
