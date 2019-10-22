@@ -27,7 +27,10 @@ class Header extends React.Component {
     return (
           <div className="NavBar">
             <Navbar fixed="top" bg="light" expand="lg">
+
+            <div style={{width: "50px"}}></div>
               <Navbar.Brand href="/home" >
+                
               <img
               alt=""
               src={require("./Landing/assets/favicon.png")}
@@ -69,7 +72,7 @@ class Header extends React.Component {
                   <NavDropdown.Item href="/">Log out</NavDropdown.Item>
                 </NavDropdown>
 
-                <div style={{width: "40px"}}></div>
+                <div style={{width: "50px"}}></div>
               
                 
                 {/* <Nav.Link href="/chat">
